@@ -7,6 +7,7 @@ namespace ClickHouseDB\Quote;
 use ClickHouseDB\Exception\QueryException;
 use ClickHouseDB\Query\Expression\Expression;
 use ClickHouseDB\Type\NumericType;
+use ClickHouseDB\Type\TupleType;
 use function array_map;
 use function is_array;
 use function is_float;
@@ -77,7 +78,7 @@ class StrictQuoteLine
             $encode_esc = preg_quote($encodeEnclosure, '/');
 
             $encode = true;
-            if ($value instanceof NumericType) {
+            if ($value instanceof NumericType || $value instanceof TupleType) {
                 $encode = false;
             }
             if ($value instanceof Expression) {
